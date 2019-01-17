@@ -1,0 +1,29 @@
+{
+  "main": "node_modules/expo/AppEntry.js",
+  "scripts": {
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "eject": "expo eject"
+  },
+  "dependencies": {
+    "classnames": "^2.2.6",
+    "expo": "^32.0.0",
+    "geolocation": "^0.2.0",
+    "jquery": "^3.3.1",
+    "moment": "^2.23.0",
+    "react": "16.5.0",
+    "react-bootstrap": "^0.32.4",
+    "react-bootstrap-daterangepicker": "^4.1.0",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz",
+    "react-native-device-info": "^0.25.0",
+    "react-select": "^2.2.0",
+    "underscore": "^1.9.1",
+    "wkcore": "git+https://github.com/MatchByte/WhiteKnight-Core.git#dev",
+    "wklib": "git+https://github.com/MatchByte/WhiteKnight-Lib.git#dev"
+  },
+  "devDependencies": {
+    "babel-preset-expo": "^5.0.0"
+  },
+  "private": true
+}
