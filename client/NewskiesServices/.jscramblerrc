@@ -1,0 +1,63 @@
+{
+  "filesSrc": [
+    "lib/index.js"
+  ],
+  "filesDest": "jscrambler/",
+  "params": [
+    {
+      "name": "booleanToAnything"
+    },
+    {
+      "name": "commaOperatorUnfolding"
+    },
+    {
+      "name": "deadCodeInjection"
+    },
+    {
+      "name": "dotToBracketNotation"
+    },
+    {
+      "name": "duplicateLiteralsRemoval"
+    },
+    {
+      "name": "functionOutlining"
+    },
+    {
+      "name": "functionReordering"
+    },
+    {
+      "name": "identifiersRenaming"
+    },
+    {
+      "name": "propertyKeysObfuscation"
+    },
+    {
+      "name": "propertyKeysReordering"
+    },
+    {
+      "name": "stringSplitting"
+    },
+    {
+      "name": "variableGrouping"
+    },
+    {
+      "name": "whitespaceRemoval"
+    }
+  ],
+  "areSubscribersOrdered": false,
+  "applicationTypes": {
+    "webBrowserApp": true,
+    "desktopApp": false,
+    "serverApp": false,
+    "hybridMobileApp": false,
+    "javascriptNativeApp": false,
+    "html5GameApp": false
+  },
+  "languageSpecifications": {
+    "es5": true,
+    "es6": false,
+    "es7": false
+  },
+  "useRecommendedOrder": true,
+  "sourceMaps": false
+}

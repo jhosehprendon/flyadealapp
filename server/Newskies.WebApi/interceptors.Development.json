@@ -1,0 +1,43 @@
+﻿{
+  "InterceptorsSettings": {
+    "Assemblies": [
+      "../Flyadeal.Interceptors/bin/Debug/netcoreapp2.0/Flyadeal.Interceptors.dll"
+    ]
+    //"Interceptors": [
+    //  {
+    //    "Controller": "Test",
+    //    "Action": "AddPaymentAndCommit",
+    //    "Request": [
+    //      {
+    //        "Type": "Newskies.WebApi.Contracts.AddPaymentToBookingRequestData, Newskies.WebApi",
+    //        "Interceptors": [ "Flyadeal.Interceptors.Actions.AddPaymentToBookingRequestInterceptor, Flyadeal.Interceptors" ],
+    //        "ParameterName": "addPaymentToBookingRequestData"
+    //      }
+    //    ],
+    //    "Response": []
+    //  }
+    // ]
+    //,
+    //{
+    //  "InterceptorType": "Flyadeal.Interceptors.Actions.CommitAgentResponseInterceptor, Flyadeal.Interceptors",
+    //  "Settings": {
+    //    "SQSQueueUrl": "https://sqs.eu-west-2.amazonaws.com/631219928864/MemberActivationTest",
+    //    "AccessKey": "AKIAIETYQ2SO2FL2MQVQ",
+    //    "SecretKey": "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",
+    //    "Region": "eu-west-2"
+    //  }
+    //},
+    //"Parameters": [
+    //  {
+    //    "InterceptorType": "Flyadeal.Interceptors.Actions.PasswordResetResponseInterceptor, Flyadeal.Interceptors",
+    //    "Settings": {
+    //      "SQSQueueUrl": "https://sqs.eu-west-2.amazonaws.com/631219928864/ForgotPasswordTest",
+    //      "AccessKey": "AKIAIETYQ2SO2FL2MQVQ",
+    //      "SecretKey": "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",
+    //      "Region": "eu-west-2"
+    //    }
+    //  }
+    //]
+
+  }
+}

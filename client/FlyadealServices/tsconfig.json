@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "module": "es6",
+    "target": "es5",
+    "noImplicitAny": true,
+    "sourceMap": true,
+    "moduleResolution": "node",
+    "declaration": true,
+    "declarationDir": "lib",
+    "outDir": "lib",
+    "allowSyntheticDefaultImports": true,
+    "lib": [ "es2017", "dom" ]
+  },
+  "include": ["src"]
+}

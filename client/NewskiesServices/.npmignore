@@ -1,0 +1,9 @@
+.*
+**/tsconfig.json
+**/rollup.config.js
+node_modules
+jscrambler
+obj
+*.njsproj
+*.tgz
+.rpt2_cache

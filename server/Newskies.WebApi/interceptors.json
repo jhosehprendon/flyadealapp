@@ -1,0 +1,674 @@
+﻿{
+  "InterceptorsSettings": {
+    "Assemblies": [
+      "./Flyadeal.Interceptors.dll"
+    ],
+    "Parameters": [
+      {
+        "InterceptorType": "Flyadeal.Interceptors.Actions.PasswordResetResponseInterceptor, Flyadeal.Interceptors",
+        "Settings": {
+          "SQSQueueUrl": "https://sqs.eu-west-2.amazonaws.com/631219928864/ForgotPasswordTest",
+          "AccessKey": "AKIAIETYQ2SO2FL2MQVQ",
+          "SecretKey": "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",
+          "Region": "eu-west-2"
+        }
+      },
+      {
+        "InterceptorType": "Flyadeal.Interceptors.Actions.CommitAgentResponseInterceptor, Flyadeal.Interceptors",
+        "Settings": {
+          "SQSQueueUrl": "https://sqs.eu-west-2.amazonaws.com/631219928864/MemberActivationTest",
+          "AccessKey": "AKIAIETYQ2SO2FL2MQVQ",
+          "SecretKey": "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",
+          "Region": "eu-west-2"
+        }
+      },
+      {
+        "InterceptorType": "Flyadeal.Interceptors.Actions.UpdatePassengersRequestInterceptor, Flyadeal.Interceptors",
+        "Settings": {
+          "YakeenCheckEnabled": "true",
+          "YakeenMaxFailures": "2",
+          "YakeenServiceUrl": "https://yakeen.eserve.com.sa/Yakeen4Flydeal/Yakeen4Flydeal",
+          "YakeenTimeoutSeconds": "5",
+          "YakeenUsername": "USR_Flydeal_PROD",
+          "YakeenPassword": "Flydeal@8467",
+          "YakeenChargeCode": "PROD",
+          "YakeenExcessiveTimeoutCount": "10",
+          "YakeenExcessiveTimeoutPeriodSeconds": "150",
+          "YakeenExcessiveTimeoutRestSeconds": "3600"
+        }
+      }
+    ],
+
+    "Interceptors": [
+      {
+        "Controller": "*",
+        "Action": "*",
+        "Validation": [
+          {
+            "Type": "Newskies.WebApi.Contracts.UpdatePassengersRequestData, Newskies.WebApi",
+            "Property": "Passengers",
+            "Interceptors": [ "Flyadeal.Interceptors.Validation.PassengerArrayLengthInterceptor, Flyadeal.Interceptors" ]
+          },
+
+          {
+            "Type": "Newskies.WebApi.Contracts.UpdatePassengersRequestData, Newskies.WebApi",
+            "Property": "Passengers",
+            "Interceptors": [ "Flyadeal.Interceptors.Validation.PassengerDocTypeCountryInterceptor, Flyadeal.Interceptors" ]
+          },
+
+          {
+            "Type": "Newskies.WebApi.Contracts.UpdatePassengersRequestData, Newskies.WebApi",
+            "Property": "Passengers",
+            "Interceptors": [ "Flyadeal.Interceptors.Validation.PassengerTravelDocumentExpirationDateInterceptor, Flyadeal.Interceptors" ]
+          },
+
+          {
+            "Type": "Newskies.WebApi.Contracts.UpdatePassengersRequestData, Newskies.WebApi",
+            "Property": "Passengers",
+            "Interceptors": [ "Flyadeal.Interceptors.Validation.PassengerTravelDocumentNumberInterceptor, Flyadeal.Interceptors" ]
+          },
+
+          {
+            "Type": "Newskies.WebApi.Contracts.UpdatePassengersRequestData, Newskies.WebApi",
+            "Property": "Passengers",
+            "Interceptors": [ "Flyadeal.Interceptors.Validation.PassengerNameInterceptor, Flyadeal.Interceptors" ]
+          },
+
+          {
+            "Type": "Newskies.WebApi.Contracts.UpdatePassengersRequestData, Newskies.WebApi",
+            "Property": "Passengers",
+            "Interceptors": [ "Flyadeal.Interceptors.Validation.PassengerDOBInterceptor, Flyadeal.Interceptors" ]
+          },
+
+          {
+            "Type": "Newskies.WebApi.Contracts.UpdatePassengersRequestData, Newskies.WebApi",
+            "Property": "Passengers",
+            "Interceptors": [ "Flyadeal.Interceptors.Validation.PassengerInfantAllowedInterceptor, Flyadeal.Interceptors" ]
+          },
+
+          {
+            "Type": "Newskies.WebApi.Contracts.UpdateContactsRequestData, Newskies.WebApi",
+            "Property": "BookingContactList",
+            "Interceptors": [ "Flyadeal.Interceptors.Validation.BookingContactListLengthInterceptor, Flyadeal.Interceptors" ]
+          },
+
+          {
+            "Type": "Newskies.WebApi.Contracts.UpdateContactsRequestData, Newskies.WebApi",
+            "Property": "BookingContactList",
+            "Interceptors": [ "Flyadeal.Interceptors.Validation.BookingContactNameInterceptor, Flyadeal.Interceptors" ]
+          },
+
+          {
+            "Type": "Newskies.WebApi.Contracts.UpdateContactsRequestData, Newskies.WebApi",
+            "Property": "BookingContactList",
+            "Interceptors": [ "Flyadeal.Interceptors.Validation.BookingContactCityInterceptor, Flyadeal.Interceptors" ]
+          },
+
+          {
+            "Type": "Newskies.WebApi.Contracts.PassengerTravelDocument, Newskies.WebApi",
+            "Property": "DocTypeCode",
+            "Interceptors": [ "Flyadeal.Interceptors.Validation.DocTypeInterceptor, Flyadeal.Interceptors" ]
+          },
+          {
+            "Type": "Newskies.WebApi.Contracts.PassengerTravelDocument, Newskies.WebApi",
+            "Property": "IssuedByCode",
+            "Interceptors": [ "Flyadeal.Interceptors.Validation.CountryInterceptor, Flyadeal.Interceptors" ]
+          },
+
+          {
+            "Type": "Newskies.WebApi.Contracts.PassengerInfo, Newskies.WebApi",
+            "Property": "Nationality",
+            "Interceptors": [ "Flyadeal.Interceptors.Validation.CountryInterceptor, Flyadeal.Interceptors" ]
+          },
+          {
+            "Type": "Newskies.WebApi.Contracts.PassengerInfo, Newskies.WebApi",
+            "Property": "ResidentCountry",
+            "Interceptors": [ "Flyadeal.Interceptors.Validation.CountryInterceptor, Flyadeal.Interceptors" ]
+          },
+
+          {
+            "Type": "Newskies.WebApi.Contracts.PassengerAddress, Newskies.WebApi",
+            "Property": "CountryCode",
+            "Interceptors": [ "Flyadeal.Interceptors.Validation.CountryInterceptor, Flyadeal.Interceptors" ]
+          },
+
+          {
+            "Type": "Newskies.WebApi.Contracts.PassengerInfant, Newskies.WebApi",
+            "Property": "Nationality",
+            "Interceptors": [ "Flyadeal.Interceptors.Validation.CountryInterceptor, Flyadeal.Interceptors" ]
+          },
+          {
+            "Type": "Newskies.WebApi.Contracts.PassengerInfant, Newskies.WebApi",
+            "Property": "ResidentCountry",
+            "Interceptors": [ "Flyadeal.Interceptors.Validation.CountryInterceptor, Flyadeal.Interceptors" ]
+          },
+
+
+          {
+            "Type": "Newskies.WebApi.Contracts.BookingContact, Newskies.WebApi",
+            "Property": "Names",
+            "Interceptors": [ "Flyadeal.Interceptors.Validation.BookingContactNamesLengthInterceptor, Flyadeal.Interceptors" ]
+          },
+          {
+            "Type": "Newskies.WebApi.Contracts.BookingContact, Newskies.WebApi",
+            "Property": "CountryCode",
+            "Interceptors": [ "Flyadeal.Interceptors.Validation.CountryInterceptor, Flyadeal.Interceptors" ]
+          },
+          {
+            "Type": "Newskies.WebApi.Contracts.BookingContact, Newskies.WebApi",
+            "Property": "CultureCode",
+            "Interceptors": [ "Flyadeal.Interceptors.Validation.CultureInterceptor, Flyadeal.Interceptors" ]
+          },
+
+          {
+            "Type": "Newskies.WebApi.Contracts.AssignSeatRequest, Newskies.WebApi",
+            "Property": "AssignSeatData",
+            "Interceptors": [ "Flyadeal.Interceptors.Validation.AssignSeatRequestInterceptor, Flyadeal.Interceptors" ]
+          },
+
+          {
+            "Type": "Newskies.WebApi.Contracts.LowFareTripAvailabilityRequest, Newskies.WebApi",
+            "Property": "AvailabilityRequests",
+            "Interceptors": [ "Flyadeal.Interceptors.Validation.LowFareAvailabilityRequestsInterceptor, Flyadeal.Interceptors" ]
+          },
+          {
+            "Type": "Newskies.WebApi.Contracts.LowFareTripAvailabilityRequest, Newskies.WebApi",
+            "Property": "CurrencyCode",
+            "Interceptors": [ "Flyadeal.Interceptors.Validation.CurrencyCodeInterceptor, Flyadeal.Interceptors" ]
+          },
+          {
+            "Type": "Newskies.WebApi.Contracts.LowFareTripAvailabilityRequest, Newskies.WebApi",
+            "Property": "PaxResidentCountry",
+            "Interceptors": [ "Flyadeal.Interceptors.Validation.CountryInterceptor, Flyadeal.Interceptors" ]
+          },
+          {
+            "Type": "Newskies.WebApi.Contracts.LowFareTripAvailabilityRequest, Newskies.WebApi",
+            "Property": "PaxTypeCounts",
+            "Interceptors": [ "Flyadeal.Interceptors.Validation.PaxTypeCountInterceptor, Flyadeal.Interceptors" ]
+          },
+
+
+
+
+          {
+            "Type": "Newskies.WebApi.Contracts.TripAvailabilityRequest, Newskies.WebApi",
+            "Property": "AvailabilityRequests",
+            "Interceptors": [ "Flyadeal.Interceptors.Validation.AvailabilityRequestsInterceptor, Flyadeal.Interceptors" ]
+          },
+          {
+            "Type": "Newskies.WebApi.Contracts.AvailabilityRequest, Newskies.WebApi",
+            "Property": "PaxTypeCounts",
+            "Interceptors": [ "Flyadeal.Interceptors.Validation.PaxTypeCountInterceptor, Flyadeal.Interceptors" ]
+          },
+          {
+            "Type": "Newskies.WebApi.Contracts.AvailabilityRequest, Newskies.WebApi",
+            "Property": "PaxResidentCountry",
+            "Interceptors": [ "Flyadeal.Interceptors.Validation.CountryInterceptor, Flyadeal.Interceptors" ]
+          },
+          {
+            "Type": "Newskies.WebApi.Contracts.SellJourneyByKeyRequestData, Newskies.WebApi",
+            "Property": "JourneySellKeys",
+            "Interceptors": [ "Flyadeal.Interceptors.Validation.SellKeyArrayLengthInterceptor, Flyadeal.Interceptors" ]
+          },
+          {
+            "Type": "Newskies.WebApi.Contracts.SellKeyList, Newskies.WebApi",
+            "Property": "JourneySellKey",
+            "Interceptors": [ "Flyadeal.Interceptors.Validation.JourneySellKeyInterceptor, Flyadeal.Interceptors" ]
+          },
+          {
+            "Type": "Newskies.WebApi.Contracts.SellKeyList, Newskies.WebApi",
+            "Property": "FareSellKey",
+            "Interceptors": [ "Flyadeal.Interceptors.Validation.FareSellKeyInterceptor, Flyadeal.Interceptors" ]
+          },
+          {
+            "Type": "Newskies.WebApi.Contracts.SellJourneyByKeyRequestData, Newskies.WebApi",
+            "Property": "CurrencyCode",
+            "Interceptors": [ "Flyadeal.Interceptors.Validation.CurrencyCodeInterceptor, Flyadeal.Interceptors" ]
+          },
+          {
+            "Type": "Newskies.WebApi.Contracts.AddPaymentToBookingRequestData, Newskies.WebApi",
+            "Property": "PaymentMethodCode",
+            "Interceptors": [ "Flyadeal.Interceptors.Validation.PaymentMethodCodeInterceptor, Flyadeal.Interceptors" ]
+          },
+          {
+            "Type": "Newskies.WebApi.Contracts.AddPaymentToBookingRequestData, Newskies.WebApi",
+            "Property": "AccountNumber",
+            "Interceptors": [ "Flyadeal.Interceptors.Validation.PaymentAccountNumberInterceptor, Flyadeal.Interceptors" ]
+          },
+          {
+            "Type": "Newskies.WebApi.Contracts.AddPaymentToBookingRequestData, Newskies.WebApi",
+            "Property": "Expiration",
+            "Interceptors": [ "Flyadeal.Interceptors.Validation.PaymentExpirationInterceptor, Flyadeal.Interceptors" ]
+          },
+          {
+            "Type": "Newskies.WebApi.Contracts.AddPaymentToBookingRequestData, Newskies.WebApi",
+            "Property": "AccountHolderName",
+            "Interceptors": [ "Flyadeal.Interceptors.Validation.PaymentAccountHolderNameInterceptor, Flyadeal.Interceptors" ]
+          },
+          {
+            "Type": "Newskies.WebApi.Contracts.AddPaymentToBookingRequestData, Newskies.WebApi",
+            "Property": "CVVCode",
+            "Interceptors": [ "Flyadeal.Interceptors.Validation.PaymentCVVCodeIntercetor, Flyadeal.Interceptors" ]
+          },
+          {
+            "Type": "Newskies.WebApi.Contracts.CheckInPassengersRequestData, Newskies.WebApi",
+            "Property": "CheckInMultiplePassengerRequestList",
+            "Interceptors": [ "Flyadeal.Interceptors.Validation.CheckInMultiplePassengerRequestInterceptor, Flyadeal.Interceptors" ]
+          },
+          {
+            "Type": "Newskies.WebApi.Contracts.SellSSRRequest, Newskies.WebApi",
+            "Property": "SSRRequestData",
+            "Interceptors": [ "Flyadeal.Interceptors.Validation.SellSsrInterceptor, Flyadeal.Interceptors" ]
+          },
+          {
+            "Type": "Newskies.WebApi.Contracts.Agent, Newskies.WebApi",
+            "Property": "AgentRoles",
+            "Interceptors": [ "Flyadeal.Interceptors.Validation.AgentRolesInterceptor, Flyadeal.Interceptors" ]
+          },
+          {
+            "Type": "Newskies.WebApi.Contracts.Agent, Newskies.WebApi",
+            "Property": "LoginName",
+            "Interceptors": [ "Flyadeal.Interceptors.Validation.EmailAddressValidationInterceptor, Flyadeal.Interceptors" ]
+          },
+          {
+            "Type": "Newskies.WebApi.Contracts.Agent, Newskies.WebApi",
+            "Property": "Password",
+            "Interceptors": [ "Flyadeal.Interceptors.Validation.AgentPasswordInterceptor, Flyadeal.Interceptors" ]
+          },
+          {
+            "Type": "Newskies.WebApi.Contracts.PasswordSetRequest, Newskies.WebApi",
+            "Property": "NewPassword",
+            "Interceptors": [ "Flyadeal.Interceptors.Validation.AgentPasswordInterceptor, Flyadeal.Interceptors" ]
+          },
+          {
+            "Type": "Newskies.WebApi.Contracts.BookingContact, Newskies.WebApi",
+            "Property": "EmailAddress",
+            "Interceptors": [ "Flyadeal.Interceptors.Validation.EmailAddressValidationInterceptor, Flyadeal.Interceptors" ]
+          },
+          {
+            "Type": "Newskies.WebApi.Contracts.Person, Newskies.WebApi",
+            "Property": "Name",
+            "Interceptors": [ "Flyadeal.Interceptors.Validation.AgentPersonNameInterceptor, Flyadeal.Interceptors" ]
+          },
+          {
+            "Type": "Newskies.WebApi.Contracts.Person, Newskies.WebApi",
+            "Property": "DOB",
+            "Interceptors": [ "Flyadeal.Interceptors.Validation.AgentDOBInterceptor, Flyadeal.Interceptors" ]
+          },
+          {
+            "Type": "Newskies.WebApi.Contracts.RemovePaymentFromBookingRequest, Newskies.WebApi",
+            "Property": "PaymentNumber",
+            "Interceptors": [ "Flyadeal.Interceptors.Validation.RemovePaymentValidationInterceptor, Flyadeal.Interceptors" ]
+          },
+          {
+            "Type": "Newskies.WebApi.Contracts.GetOrganizationRequestData, Newskies.WebApi",
+            "Property": "OrganizationCode",
+            "Interceptors": [ "Flyadeal.Interceptors.Validation.GetOrganizationValidationInterceptor, Flyadeal.Interceptors" ]
+          },
+          {
+            "Type": "Newskies.WebApi.Contracts.Organization, Newskies.WebApi",
+            "Property": "OrganizationCode",
+            "Interceptors": [ "Flyadeal.Interceptors.Validation.OrganizationCodeValidationInterceptor, Flyadeal.Interceptors" ]
+          },
+          {
+            "Type": "Newskies.WebApi.Contracts.SellFeeRequestData, Newskies.WebApi",
+            "Property": "FeeCode",
+            "Interceptors": [ "Flyadeal.Interceptors.Validation.FeeCodeValidationInterceptor, Flyadeal.Interceptors" ]
+          },
+          {
+            "Type": "Newskies.WebApi.Contracts.CancelFeeRequestData, Newskies.WebApi",
+            "Property": "FeeCode",
+            "Interceptors": [ "Flyadeal.Interceptors.Validation.FeeCodeValidationInterceptor, Flyadeal.Interceptors" ]
+          }
+        ]
+      },
+      {
+        "Controller": "Flights",
+        "Action": "Get",
+        "Request": []
+      },
+      {
+        "Controller": "Flights",
+        "Action": "Sell",
+        "Request": [
+          {
+            "Type": "Newskies.WebApi.Contracts.SellJourneyByKeyRequestData, Newskies.WebApi",
+            "Interceptors": [ "Flyadeal.Interceptors.Actions.SellJourneysRequestInterceptor, Flyadeal.Interceptors" ],
+            "ParameterName": "sellJourneyByKeyRequestData"
+          }
+        ],
+        "Response": [
+          {
+            "Type": "Newskies.WebApi.Contracts.SellResponse, Newskies.WebApi",
+            "Interceptors": [
+              "Flyadeal.Interceptors.Actions.AddBaggageSellResponseInterceptor, Flyadeal.Interceptors",
+              "Flyadeal.Interceptors.Actions.AutoAssignSeatsResponseInterceptor, Flyadeal.Interceptors"//,
+              //"Flyadeal.Interceptors.Actions.AddSMSFeeSellResponseResponseInterceptor, Flyadeal.Interceptors"
+            ]
+          }
+        ]
+      },
+      {
+        "Controller": "Flights",
+        "Action": "Change",
+        "Response": [
+          {
+            "Type": "Newskies.WebApi.Contracts.SellResponse, Newskies.WebApi",
+            "Interceptors": [
+              "Flyadeal.Interceptors.Actions.AddBaggageSellResponseInterceptor, Flyadeal.Interceptors",
+              "Flyadeal.Interceptors.Actions.AutoAssignSeatsResponseInterceptor, Flyadeal.Interceptors"
+            ]
+          }
+        ]
+      },
+      {
+        "Controller": "Ssrs",
+        "Action": "Get",
+        "Response": [
+          {
+            "Type": "Newskies.WebApi.Contracts.GetSSRAvailabilityForBookingResponse, Newskies.WebApi",
+            "Interceptors": [
+              "Flyadeal.Interceptors.Actions.GetSSRAvailabilityForBookingResponseInterceptor, Flyadeal.Interceptors"
+            ]
+          }
+        ]
+      },
+      {
+        "Controller": "Resources",
+        "Action": "DocumentTypes",
+        "Request": [],
+        "Response": [
+          {
+            "Type": "Newskies.WebApi.Contracts.GetDocTypeListResponse, Newskies.WebApi",
+            "Interceptors": [ "Flyadeal.Interceptors.Actions.GetDocTypeListResponseInterceptor, Flyadeal.Interceptors" ]
+          }
+        ]
+      },
+      {
+        "Controller": "Resources",
+        "Action": "Get",
+        "Request": [],
+        "Response": [
+          {
+            "Type": "Newskies.WebApi.Contracts.AllResourcesResponse, Newskies.WebApi",
+            "Interceptors": [ "Flyadeal.Interceptors.Actions.GetAllResourcesResponseInterceptor, Flyadeal.Interceptors" ]
+          }
+        ]
+      },
+      {
+        "Controller": "Resources",
+        "Action": "PaymentMethodsTypes",
+        "Request": [],
+        "Response": [
+          {
+            "Type": "Newskies.WebApi.Contracts.GetPaymentMethodsListResponse, Newskies.WebApi",
+            "Interceptors": [ "Flyadeal.Interceptors.Actions.PaymentMethodTypesResponseInterceptor, Flyadeal.Interceptors" ]
+          }
+        ]
+      },
+      {
+        "Controller": "Payment",
+        "Action": "Post",
+        "Request": [
+          {
+            "Type": "Newskies.WebApi.Contracts.AddPaymentToBookingRequestData, Newskies.WebApi",
+            "Interceptors": [ "Flyadeal.Interceptors.Actions.AddPaymentToBookingRequestInterceptor, Flyadeal.Interceptors" ],
+            "ParameterName": "request"
+          }
+        ],
+        "Response": []
+      },
+      {
+        "Controller": "Booking",
+        "Action": "Polling",
+        "Request": [],
+        "Response": [
+          {
+            "Type": "Newskies.WebApi.Contracts.GetPostCommitResultsResponse, Newskies.WebApi",
+            "Interceptors": [ "Flyadeal.Interceptors.Actions.GetPostCommitResultsResponseInterceptor, Flyadeal.Interceptors" ]
+          }
+        ]
+      },
+      {
+        "Controller": "Booking",
+        "Action": "Get",
+        "Request": [],
+        "Response": [
+          {
+            "Type": "Newskies.WebApi.Contracts.Booking, Newskies.WebApi",
+            "Interceptors": [ "Flyadeal.Interceptors.Actions.GetBookingResponseInterceptor, Flyadeal.Interceptors" ]
+          },
+          {
+            "Type": "Newskies.WebApi.Contracts.RetrieveBookingResponse, Newskies.WebApi",
+            "Interceptors": [ "Flyadeal.Interceptors.Actions.RetrieveBookingResponseInterceptor, Flyadeal.Interceptors" ]
+          }
+        ],
+        "Validation": [
+          {
+            "Type": "Newskies.WebApi.Contracts.RetrieveBookingRequest, Newskies.WebApi",
+            "Property": "RecordLocator",
+            "Interceptors": [ "Flyadeal.Interceptors.Validation.RetrieveBookingRequestInterceptor, Flyadeal.Interceptors" ]
+          }
+        ]
+      },
+      {
+        "Controller": "Passengers",
+        "Action": "Post",
+        "Request": [
+          {
+            "Type": "Newskies.WebApi.Contracts.UpdatePassengersRequestData, Newskies.WebApi",
+            "Interceptors": [ "Flyadeal.Interceptors.Actions.UpdatePassengersRequestInterceptor, Flyadeal.Interceptors" ],
+            "parameterName": "requestData"
+          }
+        ],
+        "Response": []
+      },
+      {
+        "Controller": "Flights",
+        "Action": "Get",
+        "Request": [],
+        "Response": [
+          {
+            "Type": "Newskies.WebApi.Contracts.TripAvailabilityResponse, Newskies.WebApi",
+            "Interceptors": [ "Flyadeal.Interceptors.Actions.TripAvailabilityResponseInterceptor, Flyadeal.Interceptors" ]
+          }
+        ]
+      },
+      {
+        "Controller": "Flights",
+        "Action": "Change",
+        "Request": [
+          {
+            "Type": "Newskies.WebApi.Contracts.ChangeFlightsRequest, Newskies.WebApi",
+            "Interceptors": [ "Flyadeal.Interceptors.Actions.ChangeFlightsRequestInterceptor, Flyadeal.Interceptors" ],
+            "parameterName": "changeFlightsRequest"
+          }
+        ],
+        "Response": []
+      },
+      {
+        "Controller": "Seats",
+        "Action": "*",
+        "Request": [
+          {
+            "Type": "Newskies.WebApi.Contracts.AssignSeatRequest, Newskies.WebApi",
+            "Interceptors": [ "Flyadeal.Interceptors.Actions.AssignSeatRequestInterceptor, Flyadeal.Interceptors" ],
+            "parameterName": "assignSeatRequest"
+          }
+        ],
+        "Response": []
+      },
+      {
+        "Controller": "Checkin",
+        "Action": "Post",
+        "Request": [],
+        "Response": [
+          {
+            "Type": "Newskies.WebApi.Contracts.CheckInPassengersResponse, Newskies.WebApi",
+            "Interceptors": [ "Flyadeal.Interceptors.Actions.CheckInPassengersResponseInterceptor, Flyadeal.Interceptors" ]
+          }
+        ]
+      },
+      {
+        "Controller": "Checkin",
+        "Action": "GetBarCodedBoardingPasses",
+        "Request": [
+          {
+            "Type": "Newskies.WebApi.Contracts.GetBarCodedBoardingPassesRequest, Newskies.WebApi",
+            "Interceptors": [ "Flyadeal.Interceptors.Actions.GetBarCodedBoardingPassesRequestInterceptor, Flyadeal.Interceptors" ],
+            "parameterName": "getBarCodedBoardingPassesRequest"
+          }
+        ],
+        "Response": [
+          {
+            "Type": "Newskies.WebApi.Contracts.GetBarCodedBoardingPassesResponse, Newskies.WebApi",
+            "Interceptors": [ "Flyadeal.Interceptors.Actions.GetBarCodedBoardingPassesResponseInterceptor, Flyadeal.Interceptors" ]
+          }
+        ]
+      },
+      {
+        "Controller": "Booking",
+        "Action": "Itinerary",
+        "Request": [],
+        "Response": [
+          {
+            "Type": "System.Boolean, System.Private.CoreLib",
+            "Interceptors": [ "Flyadeal.Interceptors.Actions.ItineraryResponseInterceptor, Flyadeal.Interceptors" ]
+          }
+        ]
+      },
+      {
+        "Controller": "Booking",
+        "Action": "Post",
+        "Validation": [
+          {
+            "Type": "Newskies.WebApi.Contracts.CommitRequest, Newskies.WebApi",
+            "Interceptors": [ "Flyadeal.Interceptors.Validation.CommitBookingValidationInterceptor, Flyadeal.Interceptors" ],
+            "Property": "Flag"
+          }
+        ],
+        "Response": [
+          {
+            "Type": "Newskies.WebApi.Contracts.CommitResponse, Newskies.WebApi",
+            "Interceptors": [ "Flyadeal.Interceptors.Actions.CommitBookingResponseInterceptor, Flyadeal.Interceptors" ]
+          }
+        ]
+      },
+      {
+        "Controller": "Agent",
+        "Action": "Get",
+        "Request": [],
+        "Response": [
+          {
+            "Type": "Newskies.WebApi.Contracts.AgentResponseData, Newskies.WebApi",
+            "Interceptors": [ "Flyadeal.Interceptors.Actions.AgentResponseInterceptor, Flyadeal.Interceptors" ]
+          }
+        ]
+      },
+      {
+        "Controller": "Agent",
+        "Action": "Post",
+        "Request": [
+          {
+            "Type": "Newskies.WebApi.Contracts.CommitAgentRequestData, Newskies.WebApi",
+            "Interceptors": [ "Flyadeal.Interceptors.Actions.CommitAgentRequestDataRequestInterceptor, Flyadeal.Interceptors" ],
+            "parameterName": "commitAgentRequestData"
+          }
+        ],
+        "Response": [
+          {
+            "Type": "Newskies.WebApi.Contracts.CommitAgentResponse, Newskies.WebApi",
+            "Interceptors": [ "Flyadeal.Interceptors.Actions.CommitAgentResponseInterceptor, Flyadeal.Interceptors" ]
+          }
+        ]
+      },
+      {
+        "Controller": "Agent",
+        "Action": "Person",
+        "Request": [
+          {
+            "Type": "Newskies.WebApi.Contracts.Person, Newskies.WebApi",
+            "Interceptors": [ "Flyadeal.Interceptors.Actions.PersonUpdateRequestInterceptor, Flyadeal.Interceptors" ],
+            "parameterName": "person"
+          }
+        ],
+        "Response": []
+      },
+      {
+        "Controller": "Agent",
+        "Action": "PersonUpdate",
+        "Request": [
+          {
+            "Type": "Newskies.WebApi.Contracts.Person, Newskies.WebApi",
+            "Interceptors": [ "Flyadeal.Interceptors.Actions.PersonUpdateByIdRequestInterceptor, Flyadeal.Interceptors" ],
+            "parameterName": "id"
+          }
+        ],
+        "Response": []
+      },
+      {
+        "Controller": "Agency",
+        "Action": "Post",
+        "Request": [
+          {
+            "Type": "Newskies.WebApi.Contracts.CommitAgencyRequest, Newskies.WebApi",
+            "Interceptors": [ "Flyadeal.Interceptors.Actions.CommitAgencyRequestInterceptor, Flyadeal.Interceptors" ],
+            "parameterName": "commitAgencyRequest"
+          }
+        ],
+        "Response": []
+      },
+      {
+        "Controller": "Agent",
+        "Action": "Agents",
+        "Request": [
+          {
+            "Type": "Newskies.WebApi.Contracts.FindAgentRequestData, Newskies.WebApi",
+            "Interceptors": [ "Flyadeal.Interceptors.Actions.FindAgentRequestDataInterceptor, Flyadeal.Interceptors" ],
+            "parameterName": "findAgentRequestData"
+          }
+        ],
+        "Response": []
+      },
+      {
+        "Controller": "Agent",
+        "Action": "Bookings",
+        "Request": [
+          {
+            "Type": "Newskies.WebApi.Contracts.FindBookingRequestData, Newskies.WebApi",
+            "Interceptors": [ "Flyadeal.Interceptors.Actions.FindBookingRequestDataInterceptor, Flyadeal.Interceptors" ],
+            "parameterName": "findBookingRequestData"
+          }
+        ],
+        "Response": [
+          {
+            "Type": "Newskies.WebApi.Contracts.FindBookingResponseData, Newskies.WebApi",
+            "Interceptors": [ "Flyadeal.Interceptors.Actions.FindBookingResponseDataInterceptor, Flyadeal.Interceptors" ]
+          }
+        ]
+      },
+      {
+        "Controller": "Agent",
+        "Action": "PasswordReset",
+        "Request": [],
+        "Response": [
+          {
+            "Type": "System.String, System.Private.CoreLib",
+            "Interceptors": [ "Flyadeal.Interceptors.Actions.PasswordResetResponseInterceptor, Flyadeal.Interceptors" ]
+          }
+        ]
+      },
+      {
+        "Controller": "Account",
+        "Action": "Get",
+        "Request": [],
+        "Response": [
+          {
+            "Type": "Newskies.WebApi.Contracts.Account, Newskies.WebApi",
+            "Interceptors": [ "Flyadeal.Interceptors.Actions.AccountResponseInterceptor, Flyadeal.Interceptors" ]
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "name": "flyadeal-services",
+  "version": "0.1.0",
+  "private": true,
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "devDependencies": {
+    "@types/underscore": "^1.8.1",
+    "babel-polyfill": "^6.26.0",
+    "copy-dir-cli": "0.0.3",
+    "del-cli": "^1.1.0",
+    "jscrambler": "^5.2.8",
+    "rollup": "^0.49.3",
+    "rollup-plugin-commonjs": "^8.2.1",
+    "rollup-plugin-typescript2": "^0.5.2",
+    "typescript": "^2.5.3"
+  },
+  "dependencies": {
+    "ajv": "^5.2.2",
+    "ajv-keywords": "^2.1.0",
+    "moment": "^2.18.1",
+    "newskies-services": "file:../NewskiesServices/newskies-services-4.1.1.tgz",
+    "underscore": "^1.8.3"
+  },
+  "scripts": {
+    "clear-dist": "node node_modules/del-cli/cli lib dist",
+    "build": "npm run clear-dist && node node_modules/typescript/bin/tsc --target es2017 && node node_modules/copy-dir-cli/bin/copy lib dist",
+    "build-rollup": "npm run clear-dist && node node_modules/rollup/bin/rollup -c config/rollup.config.js && node node_modules/copy-dir-cli/bin/copy lib dist",
+    "jscramble": "npm run clear-dist && npm run build-rollup && node node_modules/jscrambler/dist/bin/jscrambler",
+    "jscramble-pack": "node node_modules/copy-dir-cli/bin/copy jscrambler/lib dist && npm pack",
+    "update-flyadeal-libs": "npm install newskies-services"
+  }
+}
